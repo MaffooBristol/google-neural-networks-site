@@ -144,6 +144,7 @@
       it could be possible, but it's not exactly in the realm of what I'm doing here. Video can be converted using simple Bash commands like
       <a href='https://www.ffmpeg.org/'>FFMpeg</a> and <a href='http://www.imagemagick.org/script/index.php'>Imagemagick</a>:</p>
       <pre class='code'>
+$ ffmpeg -i inputs/input.mov -vf vflip -r 5 -f image2 videoframes/image-%3d.jpg
 $ find videoframes/ -name "*.jpg" -exec ./deepdream.py {} {}-processed.jpg \
   --octaves 4 --iterations 10 --step-size 3 \;
 $ convert videoframes/*-processed.jpg output/bonkers-face.gif</pre>
