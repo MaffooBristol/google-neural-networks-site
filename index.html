@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <title>Experiments with Google Neural Networks | Maffoo</title>
+      <meta charset='utf-8'>
+      <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+      <meta http-equiv='Content-Language' content='en'>
+      <meta name='viewport' content='width=1020'>
+      <link rel='stylesheet' type='text/css' src='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css' />
+      <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+      <style type='text/css'>
+        body, html {
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          background: white;
+          color: #222;
+          font-family: "Droid Serif", "Hoefler Text", "Times New Roman", serif;
+          font-size: 18px;
+        }
+        #container {
+          width: 910px;
+          margin: 0 auto;
+          padding: 20px 0px;
+          text-align: left;
+        }
+        h1, h2, h3, h4, h5, h6 {
+          font-style: italic;
+        }
+        p {
+          line-height: 1.4em;
+        }
+        img {
+          /*width: 100%;*/
+        }
+        figure {
+          margin: 0;
+          padding: 20px 0px;
+        }
+        figcaption {
+          font-size: 0.6em;
+          font-style: italic;
+          padding: 5px 0px;
+          line-height: 1.3em;
+        }
+        img.image-half {
+          width: 450px;
+          display: inline-block;
+          margin-bottom: 8px;
+        }
+        img.image-half.odd {
+          margin-right: 8px;
+        }
+        img.image-half.even {
+          margin-right: -4px;
+        }
+        pre.code {
+          margin: 0;
+          padding: 20px;
+          background: black;
+          color: #00ff44;
+          font-size: 0.8em;
+          font-weight: normal;
+          font-family: monospace;
+        }
+      </style>
+  </head>
+  <body>
+    <div id='container'>
+      <h1>Experiments with Google Neural Networks</h1>
+      <p>It's a lovely, lazy Sunday; the sun is shining, and all the folk around town are basking in the warm evening glow. What a bunch of idiots, eh?
+      Whilst they've been wasting their time with such pitiful things such as <em>"going outside"</em> and <em>"socialising"</em>, I've been busying myself
+      with something far more important: <em>Google Neural Networks</em>.</p>
+
+      <figure>
+        <img src='img/matt-face.jpg' />
+        <figcaption>After running my own face through the algorithm several times, it appears to have decided I am, in fact, a Labrador.</figcaption>
+      </figure>
+
+      <p>You may have seen this technology floating around the web recently&mdash; in essence, it's using an algorithm designed to improve Google image sorting
+      and tagging, but pushing it to extreme lengths. The main machine-learning behaviour actually stems from the BLVC's software
+      <a href='http://caffe.berkeleyvision.org/'>Caffee</a>, which takes an object and tries to learn its various visual properties, allowing it to then
+      be applied back onto other images and have its content identified. Interesting, trippy artwork can be quite easily reached by taking the original image,
+      modifying it slightly (via dithering, scaling, etc) and feeding it back into itself.</p>
+
+      <figure>
+        <img src='img/natwest-topknot-original.jpg' class='image-half odd' />
+        <img src='img/natwest-topknot-1.jpg' class='image-half even' />
+        <img src='img/natwest-topknot-2.jpg' class='image-half odd' />
+        <img src='img/natwest-topknot-3.jpg' class='image-half even' />
+        <img src='img/natwest-topknot-4.jpg' class='image-half odd' />
+        <img src='img/natwest-topknot-5.jpg' class='image-half even' />
+        <img src='img/natwest-topknot-6.jpg' class='image-half odd' />
+        <img src='img/natwest-topknot-7.jpg' class='image-half even' />
+        <img src='img/natwest-topknot-8.jpg' class='image-half odd' />
+        <img src='img/natwest-topknot-9.jpg' class='image-half even' />
+        <figcaption>The effect of the process is dependent on many factors; in this case, the <strong>octave</strong> has been increased from 1-9, respectively.
+        <br/>Each image has been processed with 15 iterations and a step size of 4.</figcaption>
+      </figure>
+
+      <p>In order to generate the images, I'm using a fork of <a href='https://github.com/MaffooBristol/clouddream'>Cloud Dream</a> (but not using the automatic
+      file watching, as it's a bit shit), which is running on a <a href='http://www.docker.com'>Docker</a> image as all the required Python dependencies are
+      much easier to manage like this, rather than trying to install everything directly onto my Mac. It's a bit of a bugger to get the file systems
+      synchronised, but with a bit of playing about with SSHFS, it'd got to the point where selecting inputs and outputs for the script was pretty easy.
+      Part of the reason for the fork was to allow command line arguments for the script, which makes experimentation a lot easier.</p>
+
+      <figure>
+        <img src='img/still-life.gif' />
+        <figcaption>This still life transforms into a hellish sea of staring peepers after being scaled and fed back into itself on each frame.
+        <br/>And yes, that is a Sonic the Hedgehog mug!</figcaption>
+      </figure>
+
+      <p>It's quite odd to see the objects that the software perceives as it goes along, and how many patterns seem to form regardless of the seminal image.
+      The most common that I've found tend to be dogs, birds, eyes and cars. I'm still not sure what the reason for this is, but I imagine it's to
+      cause everyone to profusely shit themselves.</p>
+
+      <figure>
+        <img src='img/festival-crowd-1.jpg' class='image-half odd' />
+        <img src='img/festival-crowd-2.jpg' class='image-half even' />
+        <img src='img/festival-crowd-3.jpg' class='image-half odd' />
+        <img src='img/festival-crowd-4.jpg' class='image-half even' />
+        <img src='img/festival-crowd-5.jpg' class='image-half odd' />
+        <img src='img/festival-crowd-6.jpg' class='image-half even' />
+        <figcaption>Keeping octave at 4 and step size at 1.5, the <strong>iterations</strong> are set at 1, 5, 10, 15, 20 and 25.
+        <br/>And surprise, surprise&mdash; there's that damned mutt again.</figcaption>
+      </figure>
+
+      <figure>
+        <img src='img/georgi-hand-1.jpg' class='image-half odd' />
+        <img src='img/georgi-hand-2.jpg' class='image-half even' />
+        <figcaption>Increasing the force of the algorithm seems to remove Georgi's nose and possibly one of her chromosomes.</figcaption>
+      </figure>
+
+      <p>There's also the possibility of making video that has been dreamscape-ified. I was toying with the idea of having a webcam input be able to be processed
+      on the fly, but the amount of time it takes to render a single frame is way too high. Possibly with an incredibly powerful GPU, render farms and the such,
+      it could be possible, but it's not exactly in the realm of what I'm doing here. Video can be converted using simple Bash commands like
+      <a href='https://www.ffmpeg.org/'>FFMpeg</a> and <a href='http://www.imagemagick.org/script/index.php'>Imagemagick</a>:</p>
+      <pre class='code'>
+$ find videoframes/ -name "*.jpg" -exec ./deepdream.py {} {}-processed.jpg \
+  --octaves 4 --iterations 10 --step-size 3 \;
+$ convert videoframes/*-processed.jpg output/bonkers-face.gif</pre>
+
+      <figure>
+        <img src='img/bonkers-face.gif' />
+        <figcaption>This GIF has no sound&mdash; but if it did, you would be able to hear me going "whoooa! whooaaaa!"</figcaption>
+      </figure>
+
+      <figure>
+        <img src='img/soup-blurred.jpg' />
+        <img src='img/soup-normal.jpg' />
+        <img src='img/soup-sharpened.jpg' />
+        <figcaption>A pan of boiling vegetable soup becomes a seafood and slug extravaganza. Clearly this software thinks I need more Omega 3.
+        <br/>The first image has been blurred, the second untouched and the third sharpened. Seems that blurry = eyes and sharp = slugs.</figcaption>
+      </figure>
+
+      <figure>
+        <img src='img/georgi-sombre-original.jpg' class='image-half odd' />
+        <img src='img/georgi-sombre-mashed.jpg' class='image-half even' />
+        <figcaption>I'm not even sure what happened here. I guess low lighting isn't very helpful.</figcaption>
+      </figure>
+
+      <footer><img src='img/footer-logo.png' alt='Made by Maffoo, 2015' title='Made by Maffoo, 2015' /></footer>
+
+    </div>
+  </body>
+</html>
